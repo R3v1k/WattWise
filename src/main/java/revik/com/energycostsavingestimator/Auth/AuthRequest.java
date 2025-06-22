@@ -8,6 +8,6 @@ public record AuthRequest(
         String password,
         String firstName,
         String lastName,
-        Currency currency,
+        String currency,
         BigDecimal pricePerWatt
 ) {}

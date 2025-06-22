@@ -1,4 +1,8 @@
 package revik.com.energycostsavingestimator.user.room;
 
-public record RoomCreateRequest(RoomType type) {
-}
+import jakarta.validation.constraints.NotNull;
+
+public record RoomCreateRequest(
+        @NotNull(message = "Type must be provided")
+        RoomType type
+) {}

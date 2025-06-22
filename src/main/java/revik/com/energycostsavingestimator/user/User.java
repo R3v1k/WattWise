@@ -3,14 +3,11 @@ package revik.com.energycostsavingestimator.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import revik.com.energycostsavingestimator.user.room.Room;
 
 import java.math.BigDecimal;
-import java.util.Currency;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +34,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    private Currency currency;
+    private String currency;
 
     private BigDecimal pricePerWatt;
 
