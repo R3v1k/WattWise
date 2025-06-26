@@ -11,6 +11,8 @@ import revik.com.energycostsavingestimator.user.device.DeviceResponse;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 @RestController
 @RequestMapping(path = "/api/users/{userId}/smart-devices",
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -71,6 +73,17 @@ public class SmartDeviceController {
             @PathVariable Long deviceId
     ) {
         service.removeDevice(userId, smartDeviceId, deviceId);
+    }
+
+    @Operation(summary = "Delete a smart device group")
+    @ApiResponse(responseCode = "204", description = "SmartDevice deleted")
+    @DeleteMapping("/{smartDeviceId}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteSmartDevice(
+            @PathVariable Long userId,
+            @PathVariable Long smartDeviceId
+    ) {
+        service.deleteSmartDevice(userId, smartDeviceId);
     }
 }
 

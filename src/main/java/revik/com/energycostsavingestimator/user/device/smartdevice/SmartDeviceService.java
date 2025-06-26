@@ -83,5 +83,17 @@ public class SmartDeviceService {
                 ))
                 .toList();
     }
+
+    @Transactional
+    public void deleteSmartDevice(Long userId, Long smartDeviceId) {
+        var sd = sdRepo.findById(smartDeviceId)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "SmartDevice not found"));
+
+        if (!sd.getUser().getId().equals(userId)) {
+            throw new ResponseStatusException(FORBIDDEN, "Access denied");
+        }
+
+        sdRepo.delete(sd);
+    }
 }
 
