@@ -53,7 +53,7 @@ public class AuthController implements AuthApiDocs {
 
         userRepository.save(user);
 
-        String token = jwt.generate(user.getEmail(), Set.of("USER"));
+        String token = jwt.generateToken(user);
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
@@ -74,10 +74,7 @@ public class AuthController implements AuthApiDocs {
                     .body(new ErrorResponse("error", "Invalid password or email"));
         }
 
-        String token = jwt.generate(
-                u.getEmail(),
-                u.getRoles().stream().map(Enum::name).collect(Collectors.toSet())
-        );
+        String token = jwt.generateToken(u);
 
         return ResponseEntity.ok(new AuthResponse(token));
     }
