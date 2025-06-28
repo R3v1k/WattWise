@@ -4,31 +4,28 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import revik.com.energycostsavingestimator.user.User;
-import revik.com.energycostsavingestimator.user.device.Device;
+import revik.com.energycostsavingestimator.user.device.dumbdevice.DumbDevice;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class SmartDevice {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
-
-    @ManyToOne(optional = false)
-    private User user;
 
     @ManyToMany
     @JoinTable(
-            name = "smart_device_devices",
+            name = "smart_device_supported",
             joinColumns = @JoinColumn(name = "smart_device_id"),
-            inverseJoinColumns = @JoinColumn(name = "device_id")
+            inverseJoinColumns = @JoinColumn(name = "dumb_device_id")
     )
-    private Set<Device> devices = new HashSet<>();
+    private Set<DumbDevice> supported = new HashSet<>();
 }
