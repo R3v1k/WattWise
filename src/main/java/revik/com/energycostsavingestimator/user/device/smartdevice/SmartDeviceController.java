@@ -1,6 +1,7 @@
 package revik.com.energycostsavingestimator.user.device.smartdevice;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/smart-devices")
+@PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
 public class SmartDeviceController {
     private final SmartDeviceService service;

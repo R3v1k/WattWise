@@ -7,6 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import revik.com.energycostsavingestimator.user.Role;
 import revik.com.energycostsavingestimator.user.User;
 
 import java.security.Key;
@@ -28,7 +29,11 @@ public class JwtUtil {
     public String generateToken(User user) {
         return Jwts.builder()
                 .subject(user.getEmail())
-                .claim("roles", user.getRoles())
+                .claim("roles",
+                        user.getRoles()
+                                .stream()
+                                .map(Role::name)
+                                .toList())
                 .claim("userId", user.getId())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expMs))

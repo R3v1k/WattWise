@@ -1,12 +1,14 @@
 package revik.com.energycostsavingestimator.user.device.dumbdevice;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/dumb-devices")
+@PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
 public class DumbDeviceController {
     private final DumbDeviceService service;
