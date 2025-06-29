@@ -32,7 +32,7 @@ html {
   font-family: var(--font-family);
   font-size: var(--font-base);
   width:60%; max-width:100rem;
-  height:70% auto; max-height: 100rem;
+  height:70% auto; max-height: 200rem;
   margin:4rem auto; padding:2rem;
   background:#444; color:#fff;
   border-radius:5rem;
@@ -103,3 +103,31 @@ html {
   color: #fff;
   border-bottom: 2px solid #fff;
 }
+
+/* ОБЩИЙ КОНТЕЙНЕР ДЛЯ ПАРОЛЕЙ */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* даём полю место справа под иконку */
+.password-wrapper input {
+  padding: 8px 0.5rem 8px 8px; /* top/right/bottom/left */
+}
+
+/* самая простая иконка внутри поля */
+.password-toggle {
+  all: unset;                 /* сбросим всё лишнее */
+  position: absolute;
+  top: 50%;
+  right: 0rem;             /* почти вплотную к границе */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* чтобы клики шли на кнопку, а не на svg */
+.password-toggle svg {
+  pointer-events: none;
+  display: block;
+}
+

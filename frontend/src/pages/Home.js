@@ -25,11 +25,12 @@ export default function Home() {
       <h1>Tired of wasting money & energy?</h1>
       <p>See how much you can save with our devices!</p>
       <Link to="/auth"><button
-            style={{
+            style={{  
             width: '100%',
             maxWidth: '300px',
             padding: '0.75rem 1rem',
             fontSize: '1rem',
+            borderRadius: '0.5rem',
           }}>Get started</button></Link>
     </div>
   );
