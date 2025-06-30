@@ -1,25 +1,36 @@
 package revik.com.energycostsavingestimator.energysavings;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import static java.lang.Math.round;
+import org.springframework.transaction.annotation.Transactional;
+import revik.com.energycostsavingestimator.user.device.Device;
+import revik.com.energycostsavingestimator.user.device.DeviceRepository;
+import revik.com.energycostsavingestimator.user.device.smartdevice.SmartDeviceRepository;
 
 @Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EnergyCalculatorService {
 
-    public EnergySavingsResponse calculateSavings(EnergySavingsRequest req) {
-        double power = req.power();
+    private final DeviceRepository deviceRepository;
+    private final SmartDeviceRepository smartDeviceRepository;
 
-        double energyDumb = power * req.timeOn() / 1000.0;
-        double energySmart = power * req.timeUsed() / 1000.0;
-        double savedEnergy = energyDumb - energySmart;
-        double savedCost = savedEnergy * req.tariff();
+    public double calcRoomDailySaving(Long roomId, double pricePerKwh) {
+        return deviceRepository.findAllByRoomId(roomId).stream()
+                .mapToDouble(d -> calcDeviceSaving(d, pricePerKwh))
+                .sum();
+    }
 
-        return new EnergySavingsResponse(
-                round(energyDumb),
-                round(energySmart),
-                round(savedEnergy),
-                round(savedCost)
-        );
+    public double calcUserDailySaving(Long userId, double pricePerKwh) {
+        return deviceRepository.findAllByRoomId_UserId(userId).stream()
+                .mapToDouble(d -> calcDeviceSaving(d, pricePerKwh))
+                .sum();
+    }
+
+    private double calcDeviceSaving(Device dev, double tariffPerHour) {
+        var tpl = dev.getTemplate();
+        double wastedHours = Math.max(0,
+                tpl.getTimeOn() - tpl.getTimeUsedHours());
+        return wastedHours * tariffPerHour;
     }
 }

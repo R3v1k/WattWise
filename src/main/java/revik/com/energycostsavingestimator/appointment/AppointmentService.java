@@ -77,4 +77,9 @@ public class AppointmentService {
                 ap.getAppointmentTime()
         );
     }
+
+    @Transactional(readOnly = true)
+    public List<Appointment> getAllAppointments() {
+        return appointmentRepository.findAll();
+    }
 }

@@ -94,5 +94,5 @@ public interface AuthApiDocs {
                     )
             }
     )
-    ResponseEntity<?> login(@RequestBody AuthRequest request);
+    ResponseEntity<?> login(@RequestBody LoginRequest request);
 }

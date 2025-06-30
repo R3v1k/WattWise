@@ -59,7 +59,7 @@ public class AuthController implements AuthApiDocs {
 
 
     @Override
-    public ResponseEntity<?> login(@RequestBody @Valid AuthRequest req) {
+    public ResponseEntity<?> login(@RequestBody @Valid LoginRequest req) {
         if (req.email() == null || req.email().isBlank() ||
                 req.password() == null || req.password().isBlank()) {
             return ResponseEntity
