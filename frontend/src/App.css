@@ -1,0 +1,133 @@
+* { box-sizing:border-box; margin:0; padding:0; }
+body, html, #root, .App { height:100%; font-family:'Courier New', monospace; }
+html {
+  font-size: 16px; 
+}
+:root {
+  /* Шрифты */
+  --font-base: 1rem;
+  --font-semi: 2rem;        /* = 16px по-умолчанию */
+  --font-large: 3rem;     /* = 24px */
+  --font-small: 0.875rem;   /* = 14px */
+
+  /* Семейство шрифтов */
+  --font-family: 'JetBrains Mono', monospace;
+  /* или --font-family: var(--main-font); если вы подключили Roboto */
+}
+
+.header {
+  display:flex; justify-content:space-between;
+  align-items:center; padding:12px 24px;
+  background:#555;
+}
+.header__logo img { height:32px; }
+.header__nav a {
+  color:#fff; text-decoration:none; margin-left:16px;
+  font-size:1rem;
+}
+.header__nav a:hover { text-decoration:underline; }
+
+/* Общий контейнер-табличка */
+.table {
+  font-family: var(--font-family);
+  font-size: var(--font-base);
+  width:60%; max-width:100rem;
+  height:70% auto; max-height: 200rem;
+  margin:4rem auto; padding:2rem;
+  background:#444; color:#fff;
+  border-radius:5rem;
+  text-align:center;
+  overflow: hidden;
+}
+.table button {
+  margin-top:2rem;
+  padding:1rem 2rem;
+  background:#ccc;color:#000;
+  border:none; text-decoration:underline;
+  cursor:pointer;
+  font-size: var(--font-large);
+  font-family:inherit;
+}
+.table input, .table select {
+  display:block;
+  width:100%; max-width:300px;
+  margin:8px auto;
+  padding:8px;
+  border-radius:4px;
+  border:none;
+}
+.table label { display:block; margin-top:12px; font-size:14px; }
+.table h1 {
+  font-size: var(--font-large);
+  margin-top: 4rem;
+  margin-bottom: 2.5rem; /* отступ ниже */
+}
+.table p {
+  font-size: var(--font-semi);
+  margin-bottom: 3rem; /* отступ ниже */
+}
+.devices-list {
+  display: flex;
+  flex-direction: column;   /* кладём карточки столбцом */
+  align-items: center;      /* центрируем ширину */
+  gap: 1rem;
+}
+
+.device-card {
+  width: 90%;              /* почти во всю таблицу */
+  max-width: 1000px;       /* при необходимости ограничь макс-ширину */
+}
+.device-card button {
+  margin-top:8px;
+}
+.device-card:not(:last-child) {
+  border-bottom: 2px solid #666;   /* цвет / толщину подстрой по вкусу */
+  padding-bottom: 1rem;           /* чтобы текст не прилегал к линии */
+}
+.auth-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.auth-toggle button {
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.auth-toggle button.active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+/* ОБЩИЙ КОНТЕЙНЕР ДЛЯ ПАРОЛЕЙ */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* даём полю место справа под иконку */
+.password-wrapper input {
+  padding: 8px 0.5rem 8px 8px; /* top/right/bottom/left */
+}
+
+/* самая простая иконка внутри поля */
+.password-toggle {
+  all: unset;                 /* сбросим всё лишнее */
+  position: absolute;
+  top: 50%;
+  right: 0rem;             /* почти вплотную к границе */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* чтобы клики шли на кнопку, а не на svg */
+.password-toggle svg {
+  pointer-events: none;
+  display: block;
+}
+
