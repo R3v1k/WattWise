@@ -118,8 +118,20 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 | **Local dev**   | `.env.local.enc` decrypted on demand via `make secrets:decrypt`                    |
 
 ## Quality assurance
-### User acceptance tests
+### User Acceptance Tests
 - [User acceptance tests](docs/quality-assurance/user-acceptance-tests.md)
+### Quality Attribute Scenarios
+- [Quality Attribute Scenarios](docs/quality-assurance/quality-attribute-scenarios.md)
+### Automated tests
+- **Tools used:** Jest for unit tests, Postman/Newman for API integration tests, Selenium WebDriver for end-to-end UI tests.
+- **Types of tests:**
+  - Unit tests (business logic)  
+  - API integration tests  
+  - End-to-end UI tests  
+- **Location in repo:**
+  - Unit tests: `tests/unit/`  
+  - API tests: `tests/integration/`  
+  - E2E tests: `tests/e2e/`  
 
 
 > **Never** paste secrets into code, commit history, pull requests, or chat tools. If you need a new secret, add it encrypted to the `secrets` folder and open a PR.
