@@ -118,3 +118,6 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 | **Local dev**   | `.env.local.enc` decrypted on demand via `make secrets:decrypt`                    |
 
 > **Never** paste secrets into code, commit history, pull requests, or chat tools. If you need a new secret, add it encrypted to the `secrets` folder and open a PR.
+> ## Quality assurance
+> ### User acceptance tests
+- [User acceptance tests](docs/quality-assurance/user-acceptance-tests.md)
