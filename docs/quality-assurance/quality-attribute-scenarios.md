@@ -7,10 +7,15 @@ Accurate cost and energy projections are critical for customers making investmen
 
 ### Quality Attribute Scenario:
 • Source of stimulus: Internal analysis module
+
 • Stimulus: Batch of 100 actual building usage datasets with known benchmark values
+
 • Environment: Staging environment, CPU 4 cores, 8 GB RAM
+
 • Artifact: Estimation engine component
+
 • Response: Calculate projected annual energy use and cost savings
+
 • Response measure: 95% of estimates within ±2% of benchmark values
 
 ### Execution:
@@ -23,10 +28,15 @@ Fast computations enable users to iterate through multiple scenarios without del
 
 ### Quality Attribute Scenario:
 • Stimulus source: End user GUI module
+
 • Stimulus: Asking to generate a new estimate with user-specified inputs
+
 • Environment: Production-style hardware (4 vCPU, 16 GB RAM) under 50 concurrent sessions
+
 • Artifact: Complete estimation process (API call via UI)
+
 • Response: Return estimation results to the UI
+
 • Response measure: 95% of requests complete in ≤ 3 seconds
 
 ### Execution:
@@ -39,10 +49,15 @@ Non-technical stakeholders (e.g., facility managers) must quickly interpret assu
 
 ### Quality Attribute Scenario:
 • Source of stimulus: New application user
+
 • Stimulus: Navigate to results page from estimate
+
 • Environment: Guided onboarding tutorial enabled
+
 • Artifact: Results dashboard UI
+
 • Response: User discovers input assumptions, results breakdown, and tooltips in < 2 minutes
+
 • Response measure: 90% of new users complete the task in ≤ 2 minutes with ≤ 3 help tooltip clicks
 
 ### Execution:
