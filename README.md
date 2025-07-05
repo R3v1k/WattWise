@@ -118,7 +118,7 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 | **Local dev**   | `.env.local.enc` decrypted on demand via `make secrets:decrypt`                    |
 
 ## Quality assurance
-> ### User acceptance tests
+### User acceptance tests
 - [User acceptance tests](docs/quality-assurance/user-acceptance-tests.md)
 
 
