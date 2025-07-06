@@ -4,8 +4,6 @@ import './App.css';
 import logo from './logo.svg';
 
 import Home        from './pages/Home';
-import Login       from './pages/Login';
-import Join        from './pages/Join';
 import Slider      from './pages/Slider';
 import Devices     from './pages/Devices';
 import Estimate    from './pages/Estimate';
@@ -16,21 +14,30 @@ import Auth        from './pages/Auth';
 import Admin       from './pages/Admin';
 
 function App() {
+  // Check if the user is authenticated
+  const accessToken = localStorage.getItem('accessToken');
+
+  // Clear the token when the user logs out
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+  };
+
   return (
     <BrowserRouter>
       <header className="header">
         <div className="header__logo"><img src={logo} alt="Logo" /></div>
         <nav className="header__nav">
           <Link to="/">Home</Link>
-          <Link to="/login">Log in</Link>
-          <Link to="/join">Join</Link>
+          {accessToken && (
+            <Link to="/auth" onClick={handleLogout} className="header__logout">
+              Log&nbsp;out
+            </Link>
+          )}
         </nav>
       </header>
 
       <Routes>
         <Route path="/"            element={<Home />} />
-        <Route path="/login"       element={<Login />} />
-        <Route path="/join"        element={<Join />} />
         <Route path="/start"       element={<Slider />} />
         <Route path="/devices"     element={<Devices />} />
         <Route path="/estimate"    element={<Estimate />} />
