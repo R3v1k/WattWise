@@ -19,9 +19,8 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
     
-    # Ключевое исправление - работаем в папке backend
     - name: Build backend
-      working-directory: ./backend  # Добавьте эту строку
+      working-directory: ./backend 
       run: mvn clean package -DskipTests
     
     - name: Run tests
