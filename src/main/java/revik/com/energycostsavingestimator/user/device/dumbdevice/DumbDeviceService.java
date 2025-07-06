@@ -3,7 +3,7 @@ package revik.com.energycostsavingestimator.user.device.dumbdevice;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import revik.com.energycostsavingestimator.user.device.smartdevice.SmartDeviceRepository;
 import java.util.List;
 
 @Service
@@ -11,7 +11,7 @@ import java.util.List;
 @Transactional
 public class DumbDeviceService {
     private final DumbDeviceRepository repo;
-
+    private final SmartDeviceRepository smartRepo;
     public DumbDevice create(DumbDevice dumb) {
         return repo.save(dumb);
     }
@@ -37,5 +37,9 @@ public class DumbDeviceService {
 
     public void delete(Long id) {
         repo.deleteById(id);
+    }
+
+    public List<DumbDevice> getAttached() {
+        return smartRepo.findAllSupported();
     }
 }

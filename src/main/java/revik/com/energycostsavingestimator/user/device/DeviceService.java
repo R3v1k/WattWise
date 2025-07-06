@@ -8,7 +8,7 @@ import revik.com.energycostsavingestimator.user.device.dumbdevice.DumbDevice;
 import revik.com.energycostsavingestimator.user.device.dumbdevice.DumbDeviceRepository;
 import revik.com.energycostsavingestimator.user.room.Room;
 import revik.com.energycostsavingestimator.user.room.RoomRepository;
-
+import java.util.List;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
@@ -47,5 +47,10 @@ public class DeviceService {
     @Transactional(readOnly = true)
     public Device getDevice(Long deviceId) {
         return deviceRepository.findById(deviceId).orElseThrow();
+    }
+
+    public List<Device> getDevicesByRoomId(Long roomId) {
+        Room room = roomRepository.findById(roomId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
+        return deviceRepository.findAllByRoomId(roomId);
     }
 }

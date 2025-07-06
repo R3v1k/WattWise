@@ -8,11 +8,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/dumb-devices")
-@PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
 public class DumbDeviceController {
     private final DumbDeviceService service;
-
     @PostMapping
     public DumbDevice create(@RequestBody DumbDevice dumb) {
         return service.create(dumb);
@@ -36,5 +34,9 @@ public class DumbDeviceController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
+    }
+    @GetMapping("/attached")
+    public List<DumbDevice> getAttached() {
+        return service.getAttached();
     }
 }
