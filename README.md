@@ -135,3 +135,28 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 
 
 > **Never** paste secrets into code, commit history, pull requests, or chat tools. If you need a new secret, add it encrypted to the `secrets` folder and open a PR.
+
+
+### CI Pipeline
+
+Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these practices:
+
+- **Java 17** with Maven
+- Runs on Ubuntu GitHub-hosted runners
+- Tests execute under the `test` Spring profile, using H2 in-memory database to avoid dependency on local PostgreSQL
+- Security configuration is swapped in tests with a dedicated `TestSecurityConfig` to permit all requests
+- Build steps:
+  1. Checkout repository
+  2. Set up Java and Maven caching
+  3. Build with `mvn clean package -DskipTests`
+  4. Run tests with `mvn test -Dspring.profiles.active=test`
+- Tests rely on a minimal `contextLoads` verification to ensure Spring Boot starts correctly
+- Additional integration, API, and E2E tests are executed in separate jobs (see `tests/integration/` and `tests/e2e/`)
+
+**Key requirements**:
+- The pipeline **must** be green before merging to `develop` or `main`.
+- Tests **must** pass with `application-test.properties` configured for H2.
+- The `SecurityConfig` is excluded in the `test` profile to avoid bean conflicts.
+
+> If you extend the security or data model, remember to adapt both `SecurityConfig` and `TestSecurityConfig` to keep CI green.
+
