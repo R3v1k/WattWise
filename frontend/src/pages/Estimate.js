@@ -1,56 +1,90 @@
-import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUserId } from "../hooks/useUserId"; // adjust the import path to where your hook lives
+
+// ────────────────────────────────────────────────────────────────────────────────
+// Temprorary constant until the tariff can be configured dynamically.
+// Picked a mid-range residential kWh price (USD/kWh → USD/h for an average kW).
+// Replace this with a real value once it is available from user settings/UI.
+// ────────────────────────────────────────────────────────────────────────────────
+const TARIFF_PER_HOUR = 0.15;
 
 export default function Estimate() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { rooms = [], deviceTemplates = [] } = location.state || {};
+  const userId = useUserId();
+    const token = localStorage.getItem('accessToken');
 
-  // savings per device per month
-  const savingsRates = {
-    'LED Bulb': 2,
-    'Smart Thermostat': 8,
-    'Energy Saver Fan': 3,
-    'Refrigerator': 5,
-    'Television': 4,
-    'Laptop': 3,
-    'Air Conditioner': 10,
-    'Electric Kettle': 1,
-    'Gaming Console': 4,
-    'Dishwasher': 6
-  };
+  // Backend returns the *monthly* savings figure, we derive yearly locally.
+  const [monthlySavings, setMonthlySavings] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // compute total monthly savings
-  const totalMonthly = rooms.reduce((roomAcc, room) => {
-    const counts = {};
-    (room.devices || []).forEach(d => {
-      counts[d.name] = (counts[d.name] || 0) + 1;
-    });
-    const roomSum = Object.entries(counts).reduce(
-      (sum, [name, qty]) => sum + (savingsRates[name] || 0) * qty,
-      0
-    );
-    return roomAcc + roomSum;
-  }, 0);
+  useEffect(() => {
+    if (!userId) return; // wait until we have the id
 
-  const totalYearly = totalMonthly * 12;
+    const controller = new AbortController();
 
+    const load = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `/api/savings/user/${userId}?tariffPerHour=${TARIFF_PER_HOUR}`,
+          { signal: controller.signal, headers: { Authorization: `Bearer ${token}` }}
+        );
+
+        if (!res.ok) throw new Error(`Request failed with ${res.status}`);
+
+        // The endpoint returns a primitive number, not JSON with a key
+        const value = await res.json();
+        setMonthlySavings(Number(value));
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          setError(err.message || "Unknown error");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+
+    return () => controller.abort();
+  }, [userId]);
+
+  const yearlySavings = monthlySavings != null ? monthlySavings * 12 : 0;
+
+  // ──────────────────────────────────────────────────────────────────────────────
+  // UI
+  // ──────────────────────────────────────────────────────────────────────────────
   return (
-    <div className="table" style={{ textAlign: 'center' }}>
+    <div className="table" style={{ textAlign: "center" }}>
       <p>Estimated Savings:</p>
-      <p style={{ fontSize: '2rem', margin: '1rem 0' }}>
-        ${totalMonthly.toFixed(2)} <small>monthly</small>
-      </p>
-      <p style={{ fontSize: '2rem', margin: '1rem 0' }}>
-        ${totalYearly.toFixed(2)} <small>yearly</small>
-      </p>
+
+      {loading && <p>Loading…</p>}
+      {error && (
+        <p style={{ color: "red", margin: "1rem 0" }}>
+          Couldn’t load savings&nbsp;– {error}
+        </p>
+      )}
+
+      {!loading && !error && monthlySavings != null && (
+        <>
+          <p style={{ fontSize: "2rem", margin: "1rem 0" }}>
+            ${monthlySavings.toFixed(2)} <small>monthly</small>
+          </p>
+          <p style={{ fontSize: "2rem", margin: "1rem 0" }}>
+            ${yearlySavings.toFixed(2)} <small>yearly</small>
+          </p>
+        </>
+      )}
+
       <button
-        onClick={() => navigate('/appointment')}
+        onClick={() => navigate("/appointment")}
         style={{
-          padding: '0.75rem 1.5rem',
-          fontSize: '1rem',
-          borderRadius: '0.5rem',
-          cursor: 'pointer'
+          padding: "0.75rem 1.5rem",
+          fontSize: "1rem",
+          borderRadius: "0.5rem",
+          cursor: "pointer",
         }}
       >
         Book an appointment

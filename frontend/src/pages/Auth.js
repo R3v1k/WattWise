@@ -22,7 +22,7 @@ export default function Auth() {
     padding       : isMobile ? '1rem' : '2rem',
     maxWidth      : '600px',
     width         : isMobile ? '90vw' : 'auto',
-    height        : '80vh',
+    minHeight : isMobile ? '80vh' : 'auto',
     margin        : isMobile ? '5vh auto' : '10vh auto',
   };
 
@@ -128,111 +128,140 @@ export default function Auth() {
     }
   }
 
-  return (
-    <div className="table" style={containerStyle}>
-      <div className="auth-toggle">
-        <button
-          className={mode === 'login' ? 'active' : ''}
-          onClick={() => {
-            setMode('login');
-            clearAll();
-          }}
-        >
-          Log in
-        </button>
-        <button
-          className={mode === 'register' ? 'active' : ''}
-          onClick={() => {
-            setMode('register');
-            clearAll();
-          }}
-        >
-          Register
-        </button>
-      </div>
-
-      <h2>{mode === 'login' ? 'Log in' : 'Join us!'}</h2>
-
-      {mode === 'register' && (
-        <>
-          <input
-            placeholder="First Name"
-            value={firstName}
-            onChange={e => {
-              setFirstName(e.target.value);
-              setError('');
-            }}
-            style={{ marginBottom: '1rem' }}
-          />
-          <input
-            placeholder="Last Name"
-            value={lastName}
-            onChange={e => {
-              setLastName(e.target.value);
-              setError('');
-            }}
-            style={{ marginBottom: '1rem' }}
-          />
-        </>
-      )}
-
-      <input
-        placeholder="Email"
-        type="email"
-        value={email}
-        onChange={e => {
-          setEmail(e.target.value);
-          setError('');
+return (
+  <div className="table" style={containerStyle}>
+    {/* табы «Log in / Register» */}
+    <div className="auth-toggle">
+      <button
+        className={mode === 'login' ? 'active' : ''}
+        onClick={() => {
+          setMode('login');
+          clearAll();
         }}
-        style={{ marginBottom: '1rem' }}
-      />
+      >
+        Log in
+      </button>
+      <button
+        className={mode === 'register' ? 'active' : ''}
+        onClick={() => {
+          setMode('register');
+          clearAll();
+        }}
+      >
+        Register
+      </button>
+    </div>
 
-      {renderPasswordInput('Password', password, setPassword, showPass, () => setShowPass(prev => !prev))}
+    <h2>{mode === 'login' ? 'Log in' : 'Join us!'}</h2>
 
-      {mode === 'register' &&
-        renderPasswordInput('Confirm Password', confirmPassword, setConfirmPassword, showConfirm, () => setShowConfirm(prev => !prev))}
-
-      {mode === 'register' && (
+    {/* поля, которые нужны только при регистрации */}
+    {mode === 'register' && (
+      <>
         <input
-          placeholder="Currency (e.g. USD)"
-          value={currency}
+          placeholder="First Name"
+          value={firstName}
           onChange={e => {
-            setCurrency(e.target.value);
+            setFirstName(e.target.value);
             setError('');
           }}
           style={{ marginBottom: '1rem' }}
         />
-      )}
+        <input
+          placeholder="Last Name"
+          value={lastName}
+          onChange={e => {
+            setLastName(e.target.value);
+            setError('');
+          }}
+          style={{ marginBottom: '1rem' }}
+        />
+      </>
+    )}
 
-      {mode === 'register' && (
-        <ul style={{ listStyle: 'none', padding: 0, margin: '1rem auto', textAlign: 'left', maxWidth: 300 }}>
-          <li style={{ color: isLengthValid ? 'lightgreen' : '#ff6b6b' }}>
-            {isLengthValid ? '✔' : '✖'} Min. 6 characters
-          </li>
-          <li style={{ color: hasUppercase ? 'lightgreen' : '#ff6b6b' }}>
-            {hasUppercase ? '✔' : '✖'} One uppercase letter
-          </li>
-          <li style={{ color: hasSpecialChar ? 'lightgreen' : '#ff6b6b' }}>
-            {hasSpecialChar ? '✔' : '✖'} One special char (!@#*()-)
-          </li>
-          <li style={{ color: isConfirmMatch ? 'lightgreen' : '#ff6b6b' }}>
-            {isConfirmMatch ? '✔' : '✖'} Passwords match
-          </li>
-        </ul>
-      )}
+    {/* email */}
+    <input
+      placeholder="Email"
+      type="email"
+      value={email}
+      onChange={e => {
+        setEmail(e.target.value);
+        setError('');
+      }}
+      style={{ marginBottom: '1rem' }}
+    />
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    {/* пароль */}
+    {renderPasswordInput(
+      'Password',
+      password,
+      setPassword,
+      showPass,
+      () => setShowPass(prev => !prev)
+    )}
 
-      <button style = {{borderRadius: '0.5rem'}}
-        onClick={handleSubmit}
-        disabled={
-          mode === 'register'
-            ? !isPasswordValid || !isConfirmMatch || !firstName || !lastName || !email
-            : false
-        }
+    {/* подсказки – появляются ТОЛЬКО при регистрации и ТОЛЬКО когда пользователь начал вводить пароль */}
+    {mode === 'register' && password.length > 0 && (
+      <ul
+        style={{
+          listStyle : 'none',
+          padding   : 0,
+          margin    : '0.5rem auto 1rem',
+          textAlign : 'left',
+          maxWidth  : 300,
+        }}
       >
-        Proceed
-      </button>
-    </div>
-  );
-}
+        <li style={{ color: isLengthValid ? 'lightgreen' : '#ff6b6b' }}>
+          {isLengthValid ? '✔' : '✖'} Min. 6 characters
+        </li>
+        <li style={{ color: hasUppercase ? 'lightgreen' : '#ff6b6b' }}>
+          {hasUppercase ? '✔' : '✖'} One uppercase letter
+        </li>
+        <li style={{ color: hasSpecialChar ? 'lightgreen' : '#ff6b6b' }}>
+          {hasSpecialChar ? '✔' : '✖'} One special char from (!@#*()-)
+        </li>
+        <li style={{ color: isConfirmMatch ? 'lightgreen' : '#ff6b6b' }}>
+          {isConfirmMatch ? '✔' : '✖'} Passwords match
+        </li>
+      </ul>
+    )}
+
+    {/* подтверждение пароля */}
+    {mode === 'register' &&
+      renderPasswordInput(
+        'Confirm Password',
+        confirmPassword,
+        setConfirmPassword,
+        showConfirm,
+        () => setShowConfirm(prev => !prev)
+      )}
+
+    {/* валюта */}
+    {mode === 'register' && (
+      <input
+        placeholder="Currency (e.g. USD)"
+        value={currency}
+        onChange={e => {
+          setCurrency(e.target.value);
+          setError('');
+        }}
+        style={{ marginBottom: '1rem' }}
+      />
+    )}
+
+    {/* ошибка */}
+    {error && <p style={{ color: 'red' }}>{error}</p>}
+
+    {/* кнопка отправки */}
+    <button
+      style={{ borderRadius: '0.5rem' }}
+      onClick={handleSubmit}
+      disabled={
+        mode === 'register'
+          ? !isPasswordValid || !isConfirmMatch || !firstName || !lastName || !email
+          : false
+      }
+    >
+      Proceed
+    </button>
+  </div>
+)};

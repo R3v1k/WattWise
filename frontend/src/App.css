@@ -1,3 +1,4 @@
+
 * { box-sizing:border-box; margin:0; padding:0; }
 body, html, #root, .App { height:100%; font-family:'Courier New', monospace; }
 html {
@@ -32,12 +33,12 @@ html {
   font-family: var(--font-family);
   font-size: var(--font-base);
   width:60%; max-width:100rem;
-  height:70% auto; max-height: 200rem;
+  height:auto;
   margin:4rem auto; padding:2rem;
   background:#444; color:#fff;
   border-radius:5rem;
   text-align:center;
-  overflow: hidden;
+  overflow: visible;
 }
 .table button {
   margin-top:2rem;
