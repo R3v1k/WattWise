@@ -1,17 +1,13 @@
-name: Full Stack CI/CD
+name: Java CI
 
 on:
   push:
-    branches: [ main, develop ]
-    paths:
-      - 'backend/**'  # Триггерим при изменении бэкенда
-      - 'frontend/**' # Триггерим при изменении фронтенда
-      - 'pom.xml'    # И при изменении конфигурации Maven
+    branches: ["main"]
   pull_request:
-    branches: [ main ]
+    branches: ["main"]
 
 jobs:
-  backend:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -22,64 +18,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: 'maven'
-        
-    - name: Build and Test Backend
-      run: |
-        cd backend
-        mvn clean package
-        mvn test
-        
-    - name: Upload Backend Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: backend-jar
-        path: backend/target/*.jar
-
-  frontend:
-    needs: backend
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
     
-    - name: Use Node.js 20.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
-        
-    - name: Install Frontend Dependencies
-      working-directory: frontend
-      run: npm ci
-      
-    - name: Build Frontend
-      working-directory: frontend
-      run: npm run build
-      
-    - name: Run Frontend Tests
-      working-directory: frontend
-      run: npm test
-      
-    - name: Upload Frontend Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: frontend-build
-        path: frontend/build
-
-  deploy:
-    needs: [backend, frontend]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'  # Только для main ветки
+    - name: Build backend
+      working-directory: ./backend
+      run: mvn clean package -DskipTests
     
-    steps:
-    - name: Download Artifacts
-      uses: actions/download-artifact@v3
-      with:
-        path: artifacts
-        
-    - name: Show Artifacts
-      run: ls -R artifacts
-      
-    - name: Notify Deployment
-      run: |
-        echo "Backend and frontend built successfully!"
-        echo "Add your deployment steps here (Heroku, AWS, etc.)"
+    - name: Run tests
+      working-directory: ./backend
+      run: mvn test
