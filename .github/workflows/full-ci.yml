@@ -25,5 +25,6 @@ jobs:
       run: mvn clean package -DskipTests
     
     - name: Run tests
-      working-directory: ./backend  # И здесь
-      run: mvn test
+      working-directory: ./backend
+      run: mvn test -Dspring.profiles.active=test
+
