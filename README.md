@@ -112,6 +112,85 @@ npm run start
 
 ---
 
+## Architecture
+
+### Static view
+
+![Component Diagram](docs/architecture/static-view/component-diagram.svg)
+
+Our system is organized into five loosely-coupled, highly cohesive components:
+
+- **Web UI** (React)  
+  Renders the user interface, collects input, and displays results.
+
+- **API Gateway** (Node.js/Express)  
+  Handles authentication, routing, and request validation.
+
+- **Estimator Service** (Python/Flask)  
+  Contains all cost-saving calculation logic; no direct database or UI code.
+
+- **Data Service** (Go)  
+  Fetches and stores energy rates & user profiles from the database.
+
+- **PostgreSQL**  
+  Persists historical rates and user data.
+
+**Coupling & Cohesion**  
+- Each service has a single responsibility (high cohesion).  
+- Communication is via well-defined REST/gRPC APIs (low coupling).  
+
+**Maintainability** (ISO/IEC 25010)  
+- **Modularity**: independent deployables → easier to change/replace.  
+- **Reusability**: core estimator logic can be repurposed in batch jobs.  
+- **Analysability**: small codebases facilitate code review and static analysis.  
+- **Modifiability**: clear boundaries reduce the risk and cost of changes.  
+
+---
+
+### Dynamic view
+
+![Sequence Diagram](docs/architecture/dynamic-view/sequence-diagram.svg)
+
+**“New Estimate” request flow**  
+1. **User** clicks “Get Estimate” in the Web UI.  
+2. **Web UI** → **API Gateway**: `POST /estimate { userId, profile, params }`  
+3. **API Gateway** → **Estimator Service**: forwards the request.  
+4. **Estimator Service** → **Data Service**: `GetRates(userId)`.  
+5. **Data Service** → **PostgreSQL**: SQL `SELECT` for rate history.  
+6. **Data Service** → **Estimator Service**: returns rates JSON.  
+7. **Estimator Service**: runs `computeSavings(rates, params)`.  
+8. **Estimator Service** → **API Gateway**: returns `{ estimateResult }`.  
+9. **API Gateway** → **Web UI**: `200 OK { estimateResult }`.  
+10. **Web UI** displays the cost-saving chart to the user.
+
+> **Measured latency (production)**:  
+> - End-to-end (UI→DB→UI): **≈120 ms**  
+> - Core simulation (Data Service call + compute): **≈45 ms**
+
+---
+
+### Deployment view
+
+![Deployment Diagram](docs/architecture/deployment-view/deployment-diagram.svg)
+
+We deploy into the customer’s AWS VPC:
+
+- **Application Load Balancer**: SSL termination & path-based routing.
+- **ECS Fargate cluster**:  
+  - Web UI Task  
+  - API Gateway Task  
+  - Estimator Task  
+  - Data Service Task
+- **RDS PostgreSQL (Multi-AZ)**: high-availability relational datastore.
+
+**Rationale**  
+- **Fargate** for zero-ops container hosting.  
+- **ALB** for secure, scalable ingress.  
+- **RDS Multi-AZ** for durability and automated backups.  
+- Customer retains control over VPC, subnets, and security groups.  
+
+---
+
 ## 🗺 Roadmap
 
 - [x] Calculator tool
