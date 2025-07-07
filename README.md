@@ -1,3 +1,175 @@
+<a id="readme-top"></a>
+
+# 📊 Energy Cost Saving Estimator
+
+[![Contributors](https://img.shields.io/github/contributors/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/network/members)
+[![Stargazers](https://img.shields.io/github/stars/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/stargazers)
+[![Issues](https://img.shields.io/github/issues/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/issues)
+[![License](https://img.shields.io/github/license/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/blob/main/LICENSE)
+
+---
+
+<div align="center">
+  <h3 align="center">Energy Cost Saving Estimator</h3>
+  <p align="center">
+    A smart tool to estimate potential savings from optimizing energy usage.
+    <br />
+    <a href="https://github.com/R3v1k/EnergyCostSavingEstimator"><strong>Explore the documentation »</strong></a>
+    <br />
+    <br />
+    <a href="https://drive.google.com/file/d/1jFldc7cPTFhcbB_Lyyhdt7Cn5E1Y1cAM/view?usp=sharing">View Demo</a>
+    ·
+    <a href="https://github.com/R3v1k/EnergyCostSavingEstimator/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/R3v1k/EnergyCostSavingEstimator/issues">Request Feature</a>
+  </p>
+</div>
+
+## 📌 Table of Contents
+- [About The Project](#-about-the-project)
+  - [Built With](#-built-with)
+- [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#-usage)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Contact](#-contact)
+- [Acknowledgments](#-acknowledgments)
+
+---
+
+## 💡 About The Project
+
+The Energy Cost Saving Estimator helps users evaluate and plan energy-saving strategies. With real-time device management and usage simulation, it enables informed decisions for smarter consumption.
+
+**Key Features:**
+- Device & room configuration
+- Smart vs dumb device linking
+- Appointment tracking from the database
+- Energy savings calculator
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+### 🛠 Built With
+
+- Java (Spring Boot)
+- JavaScript (React.js)
+- Node.js
+- SQL Server
+- Docker
+- Swagger
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js >= 16
+- Java >= 17
+- SQL Server instance
+
+### Installation
+
+```bash
+git clone https://github.com/R3v1k/EnergyCostSavingEstimator.git
+cd EnergyCostSavingEstimator
+```
+
+#### Backend:
+
+```bash
+cd backend
+./gradlew build
+```
+
+#### Frontend:
+
+```bash
+cd frontend
+npm install
+npm run start
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🧩 Usage
+
+- Admin panel: Add devices and users
+- Estimator: Input energy data, run simulation
+- Database logs: Track appointments and user-device interactions
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🗺 Roadmap
+
+- [x] Calculator tool
+- [x] Admin panel integration
+- [x] Appointment log from DB
+- [ ] Enhanced user analytics dashboard
+- [ ] Multi-language support
+
+See the [issues](https://github.com/R3v1k/EnergyCostSavingEstimator/issues) for more.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo  
+2. Create your feature branch (`git checkout -b feature/YourFeature`)  
+3. Commit your changes (`git commit -m 'Add YourFeature'`)  
+4. Push to the branch (`git push origin feature/YourFeature`)  
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for details.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 📬 Contact
+
+Project Maintainers:  
+[R3v1k](https://github.com/R3v1k) <br>
+[alyaalyo](https://github.com/alyaalyo) <br>
+[etern1ty22](https://github.com/etern1ty22) <br> 
+[Ta6leTkaa](https://github.com/Ta6leTkaa) <br>
+[Brevolg](https://github.com/Brevolg)
+
+Project Link: [https://github.com/R3v1k/EnergyCostSavingEstimator](https://github.com/R3v1k/EnergyCostSavingEstimator)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🙏 Acknowledgments
+
+- [Shields.io](https://shields.io)  
+- [GitHub Pages](https://pages.github.com)  
+- [Font Awesome](https://fontawesome.com)  
+- [OpenAI](https://openai.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Development
 
 > **Scope:** The practices in this section were agreed by the team during **Sprint 5 (26 May – 30 June 2025)** and are effective for all future work unless superseded.
