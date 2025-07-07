@@ -6,7 +6,7 @@
 [![Forks](https://img.shields.io/github/forks/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/network/members)
 [![Stargazers](https://img.shields.io/github/stars/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/stargazers)
 [![Issues](https://img.shields.io/github/issues/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/issues)
-[![License](https://img.shields.io/github/license/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/blob/main/LICENSE.md)
+[![License](https://img.shields.io/github/license/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/blob/main/LICENSE)
 
 ---
 
