@@ -1,0 +1,39 @@
+@startuml
+'–– Title for clarity ––
+title “New Estimate” Request Flow
+
+actor User
+participant "Web UI\n(React)" as UI
+participant "API Gateway\n(Node.js)" as API
+participant "Estimator\nService" as EST
+participant "Data\nService" as DS
+database "PostgreSQL\n(energy_db)" as DB
+
+User -> UI : Click “Get Estimate”
+UI -> API : POST /estimate { userId, profile, params }
+activate API
+
+API -> EST : Forward request
+activate EST
+
+EST -> DS : GetRates(userId)
+activate DS
+
+DS -> DB : SELECT * FROM rates WHERE user_id = ?
+activate DB
+DB --> DS : [rateRows]
+deactivate DB
+
+DS --> EST : {rates}
+deactivate DS
+
+EST -> EST : computeSavings(rates, params)
+EST --> API : {estimateResult}
+deactivate EST
+
+API --> UI : 200 OK {estimateResult}
+deactivate API
+
+UI -> User : Display cost-saving chart
+
+@enduml

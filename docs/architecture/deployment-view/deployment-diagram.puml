@@ -1,0 +1,28 @@
+@startuml
+skinparam componentStyle rectangle
+
+node "Customer VPC" {
+  [ALB\n(Application Load Balancer)] as alb
+  node "ECS Fargate\nCluster" {
+    [Web UI Task] as webTask
+    [API Gateway Task] as apiTask
+    [Estimator Task] as estTask
+    [Data Service Task] as dataTask
+  }
+  database "RDS PostgreSQL\nMulti-AZ" as rds
+}
+
+alb --> webTask : HTTPS (443)
+alb --> apiTask : HTTPS (443)
+apiTask --> estTask : gRPC (50051)
+apiTask --> dataTask : gRPC (50052)
+estTask --> rds : SQL/TCP (5432)
+dataTask --> rds : SQL/TCP (5432)
+
+legend right
+  |= Icon |= Description |
+  | ALB | Application Load Balancer |
+  | ECS Fargate | Container hosting (managed) |
+  | RDS | Relational DB (HA) |
+endlegend
+@enduml
