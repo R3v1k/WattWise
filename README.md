@@ -33,12 +33,30 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#-usage)
+- [Architecture](#architecture)
+  - [Static view](#static-view)
+  - [Dynamic view](#dynamic-view)
+  - [Deployment view](#deployment-view)
+- [Development](#development)
+  - [Kanban boards](#kanban-boards)
+  - [Git workflow](#git-workflow)
+    - [Issue management](#issue-management)
+    - [Branching strategy](#branching-strategy)
+    - [Commit messages](#commit-messages)
+    - [Pull Requests](#pull-requests)
+    - [Code reviews](#code-reviews)
+    - [Resolving issues](#resolving-issues)
+  - [Secrets management](#secrets-management)
+- [Quality assurance](#quality-assurance)
+  - [User Acceptance Tests](#user-acceptance-tests)
+  - [Quality Attribute Scenarios](#quality-attribute-scenarios)
+  - [Automated tests](#automated-tests)
+- [Build and deployment](#build-and-deployment)
 - [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Contact](#-contact)
 - [Acknowledgments](#-acknowledgments)
-
 ---
 
 ## 💡 About The Project
@@ -112,7 +130,7 @@ npm run start
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 ### Static view
 
@@ -190,7 +208,7 @@ We deploy into the customer’s AWS VPC:
 - Customer retains control over VPC, subnets, and security groups.  
 
 ---
-## Development
+## 🛠️ Development
 
 > **Scope:** The practices in this section were agreed by the team during **Sprint 5 (26 May – 30 June 2025)** and are effective for all future work unless superseded.
 
@@ -309,7 +327,7 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 | **Runtime**     | Application reads configuration exclusively from environment variables (12‑Factor) |
 | **Local dev**   | `.env.local.enc` decrypted on demand via `make secrets:decrypt`                    |
 
-## Quality assurance
+## 🔍 Quality assurance
 ### User Acceptance Tests
 - [User acceptance tests](docs/quality-assurance/user-acceptance-tests.md)
 ### Quality Attribute Scenarios
@@ -329,7 +347,7 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 > **Never** paste secrets into code, commit history, pull requests, or chat tools. If you need a new secret, add it encrypted to the `secrets` folder and open a PR.
 ---
 
-### Build and deployment
+### 🚀 Build and deployment
 
 Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these practices:
 
