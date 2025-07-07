@@ -190,65 +190,6 @@ We deploy into the customer’s AWS VPC:
 - Customer retains control over VPC, subnets, and security groups.  
 
 ---
-
-## 🗺 Roadmap
-
-- [x] Calculator tool
-- [x] Admin panel integration
-- [x] Appointment log from DB
-- [ ] Enhanced user analytics dashboard
-- [ ] Multi-language support
-
-See the [issues](https://github.com/R3v1k/EnergyCostSavingEstimator/issues) for more.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## 🤝 Contributing
-
-1. Fork the repo  
-2. Create your feature branch (`git checkout -b feature/YourFeature`)  
-3. Commit your changes (`git commit -m 'Add YourFeature'`)  
-4. Push to the branch (`git push origin feature/YourFeature`)  
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## 📜 License
-
-Distributed under the MIT License. See `LICENSE` for details.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## 📬 Contact
-
-Project Maintainers:  
-[R3v1k](https://github.com/R3v1k) <br>
-[alyaalyo](https://github.com/alyaalyo) <br>
-[etern1ty22](https://github.com/etern1ty22) <br> 
-[Ta6leTkaa](https://github.com/Ta6leTkaa) <br>
-[Brevolg](https://github.com/Brevolg)
-
-Project Link: [https://github.com/R3v1k/EnergyCostSavingEstimator](https://github.com/R3v1k/EnergyCostSavingEstimator)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## 🙏 Acknowledgments
-
-- [Shields.io](https://shields.io)  
-- [GitHub Pages](https://pages.github.com)  
-- [Font Awesome](https://fontawesome.com)  
-- [OpenAI](https://openai.com)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Development
 
 > **Scope:** The practices in this section were agreed by the team during **Sprint 5 (26 May – 30 June 2025)** and are effective for all future work unless superseded.
@@ -386,9 +327,9 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 
 
 > **Never** paste secrets into code, commit history, pull requests, or chat tools. If you need a new secret, add it encrypted to the `secrets` folder and open a PR.
+---
 
-
-### CI Pipeline
+### Build and deployment
 
 Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these practices:
 
@@ -410,4 +351,62 @@ Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these 
 - The `SecurityConfig` is excluded in the `test` profile to avoid bean conflicts.
 
 > If you extend the security or data model, remember to adapt both `SecurityConfig` and `TestSecurityConfig` to keep CI green.
+---
+## 🗺 Roadmap
+
+- [x] Calculator tool
+- [x] Admin panel integration
+- [x] Appointment log from DB
+- [ ] Enhanced user analytics dashboard
+- [ ] Multi-language support
+
+See the [issues](https://github.com/R3v1k/EnergyCostSavingEstimator/issues) for more.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo  
+2. Create your feature branch (`git checkout -b feature/YourFeature`)  
+3. Commit your changes (`git commit -m 'Add YourFeature'`)  
+4. Push to the branch (`git push origin feature/YourFeature`)  
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for details.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 📬 Contact
+
+Project Maintainers:  
+[R3v1k](https://github.com/R3v1k) <br>
+[alyaalyo](https://github.com/alyaalyo) <br>
+[etern1ty22](https://github.com/etern1ty22) <br> 
+[Ta6leTkaa](https://github.com/Ta6leTkaa) <br>
+[Brevolg](https://github.com/Brevolg)
+
+Project Link: [https://github.com/R3v1k/EnergyCostSavingEstimator](https://github.com/R3v1k/EnergyCostSavingEstimator)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🙏 Acknowledgments
+
+- [Shields.io](https://shields.io)  
+- [GitHub Pages](https://pages.github.com)  
+- [Font Awesome](https://fontawesome.com)  
+- [OpenAI](https://openai.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
