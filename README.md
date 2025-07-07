@@ -326,7 +326,7 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 | **CI/CD**       | Secrets injected via GitHub Actions *Repository* or *Environment* secrets          |
 | **Runtime**     | Application reads configuration exclusively from environment variables (12‑Factor) |
 | **Local dev**   | `.env.local.enc` decrypted on demand via `make secrets:decrypt`                    |
-
+---
 ## 🔍 Quality assurance
 ### User Acceptance Tests
 - [User acceptance tests](docs/quality-assurance/user-acceptance-tests.md)
@@ -347,7 +347,7 @@ Issues transition automatically when the linked PR is merged; manual adjustments
 > **Never** paste secrets into code, commit history, pull requests, or chat tools. If you need a new secret, add it encrypted to the `secrets` folder and open a PR.
 ---
 
-### 🚀 Build and deployment
+## 🚀 Build and deployment
 
 Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these practices:
 
