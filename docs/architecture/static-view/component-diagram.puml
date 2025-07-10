@@ -1,0 +1,16 @@
+@startuml
+' Use rectangle style for components
+skinparam componentStyle rectangle
+
+component "Web UI\n(React)"        as web
+component "API Gateway\n(Node.js)" as api
+component "Estimator Service\n(Python/Flask)" as est
+component "Data Service\n(Go)"     as data
+database  "PostgreSQL"             as db
+
+web --> api : HTTPS REST
+api --> est : gRPC/JSON
+api --> data: gRPC/JSON
+est --> db : SQL/TCP
+data --> db: SQL/TCP
+@enduml
