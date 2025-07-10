@@ -105,7 +105,7 @@ cd EnergyCostSavingEstimator
 
 ```bash
 cd backend
-./gradlew build
+./mvnw
 ```
 
 #### Frontend:
