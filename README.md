@@ -73,6 +73,12 @@ The Energy Cost Saving Estimator helps users evaluate and plan energy-saving str
 
 ---
 
+## Context Diagram
+
+![Context Diagram](docs/architecture/context-diagram/context-diagram.svg)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### 🛠 Built With
 
 - Java (Spring Boot)
