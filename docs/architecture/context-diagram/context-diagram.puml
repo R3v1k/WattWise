@@ -1,0 +1,25 @@
+@startuml
+title System Context Diagram: Energy Cost Saving Estimator
+
+actor "User" as U
+
+package "Energy Cost Saving Estimator" {
+    [Web UI\n(React)] as UI
+    [API Gateway\n(Node.js)] as API_GW
+    [Estimator Service\n(Java/Python)] as Calc
+}
+
+database "SQL Server Database" as DB
+rectangle "Energy Price API" as PriceAPI
+
+' User interactions
+U --> UI : inputs parameters\nreceives results
+
+' Internal communication
+UI --> API_GW : REST API calls
+API_GW --> Calc : Forward request
+API_GW --> DB : User profile, logs
+Calc --> DB : Historical data, user energy use
+Calc --> PriceAPI : Get latest rates
+
+@enduml
