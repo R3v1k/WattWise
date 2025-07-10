@@ -105,7 +105,8 @@ cd EnergyCostSavingEstimator
 
 ```bash
 cd backend
-./mvnw
+./mvnw install
+./mvnw spring-boot:run
 ```
 
 #### Frontend:
