@@ -355,7 +355,7 @@ Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these 
 - **Java 17** with Maven
 - Runs on Ubuntu GitHub-hosted runners
 - Tests execute under the `test` Spring profile, using H2 in-memory database to avoid dependency on local PostgreSQL
-- Security configuration is swapped in tests with a dedicated `TestSecurityConfig` to permit all requests
+- Security configuration is swapped in tests with a dedicated `revik.com.energycostsavingestimator.TestSecurityConfig` to permit all requests
 - Build steps:
   1. Checkout repository
   2. Set up Java and Maven caching
@@ -369,7 +369,7 @@ Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these 
 - Tests **must** pass with `application-test.properties` configured for H2.
 - The `SecurityConfig` is excluded in the `test` profile to avoid bean conflicts.
 
-> If you extend the security or data model, remember to adapt both `SecurityConfig` and `TestSecurityConfig` to keep CI green.
+> If you extend the security or data model, remember to adapt both `SecurityConfig` and `revik.com.energycostsavingestimator.TestSecurityConfig` to keep CI green.
 ---
 ## 🗺 Roadmap
 
