@@ -29,6 +29,7 @@
 ## 📌 Table of Contents
 - [About The Project](#-about-the-project)
   - [Built With](#-built-with)
+  - [Context Diagram](#-context-diagram)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -78,6 +79,8 @@ The Energy Cost Saving Estimator helps users evaluate and plan energy-saving str
 ![Context Diagram](docs/architecture/context-diagram/context-diagram.svg)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
 
 ### 🛠 Built With
 
