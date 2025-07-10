@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface DeviceRepository extends JpaRepository<Device, Long> {
     List<Device> findAllByRoomId(Long roomId);
+    List<Device> findAllByRoomId_UserId(Long userId);
 }

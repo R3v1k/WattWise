@@ -30,4 +30,14 @@ public class Room {
     @JsonManagedReference
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Device> devices;
+
+    public void addDevice(Device device) {
+        devices.add(device);
+        device.setRoom(this);
+    }
+
+    public void removeDevice(Device device) {
+        devices.remove(device);
+        device.setRoom(null);
+    }
 }

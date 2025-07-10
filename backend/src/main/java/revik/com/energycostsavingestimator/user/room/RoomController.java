@@ -39,12 +39,11 @@ public class RoomController {
         return ResponseEntity.ok(dto);
     }
 
-    @Operation(summary = "Get rooms by user ID (admin only)")
+    @Operation(summary = "Get rooms by user ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Rooms retrieved"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/user/{id}")
     public ResponseEntity<List<RoomResponse>> getRoomsByUser(@PathVariable Long id) {
         return ResponseEntity.ok(roomService.getRoomsByUser(id));

@@ -1,61 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUserId } from "../hooks/useUserId"; // adjust the import path to where your hook lives
+import { useNavigate, useLocation } from "react-router-dom";
+import { useUserId } from "../hooks/useUserId";
 
-// ────────────────────────────────────────────────────────────────────────────────
-// Temprorary constant until the tariff can be configured dynamically.
-// Picked a mid-range residential kWh price (USD/kWh → USD/h for an average kW).
-// Replace this with a real value once it is available from user settings/UI.
-// ────────────────────────────────────────────────────────────────────────────────
-const TARIFF_PER_HOUR = 0.15;
-
+/**
+ * Страница показывает экономию, запрашивая её у backend.
+ * Цена за кВт·ч передаётся через navigate-state со страницы Rooms.
+ * Если значение не передано, берётся 0.15 $/kWh.
+ */
 export default function Estimate() {
-  const navigate = useNavigate();
-  const userId = useUserId();
-    const token = localStorage.getItem('accessToken');
+  const navigate  = useNavigate();
+  const location  = useLocation();
+  const userId    = useUserId();
+  const token     = localStorage.getItem("accessToken");
 
-  // Backend returns the *monthly* savings figure, we derive yearly locally.
+  /** Цена $/kWh (передаётся со страницы Rooms) */
+  const tariffPerHour =
+    Number(location.state?.tariff) > 0 ? Number(location.state.tariff) : 0.15;
+
   const [monthlySavings, setMonthlySavings] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading,        setLoading]        = useState(true);
+  const [error,          setError]          = useState(null);
 
   useEffect(() => {
-    if (!userId) return; // wait until we have the id
-
+    if (!userId) return;           // ждём id пользователя
     const controller = new AbortController();
 
     const load = async () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `/api/savings/user/${userId}?tariffPerHour=${TARIFF_PER_HOUR}`,
-          { signal: controller.signal, headers: { Authorization: `Bearer ${token}` }}
+          `/api/savings/user/${userId}?tariffPerHour=${tariffPerHour}`,
+          { signal: controller.signal, headers: { Authorization: `Bearer ${token}` } }
         );
 
         if (!res.ok) throw new Error(`Request failed with ${res.status}`);
 
-        // The endpoint returns a primitive number, not JSON with a key
+        // endpoint возвращает число
         const value = await res.json();
         setMonthlySavings(Number(value));
       } catch (err) {
-        if (err.name !== "AbortError") {
-          setError(err.message || "Unknown error");
-        }
+        if (err.name !== "AbortError") setError(err.message || "Unknown error");
       } finally {
         setLoading(false);
       }
     };
 
     load();
-
     return () => controller.abort();
-  }, [userId]);
+  }, [userId, tariffPerHour, token]);
 
   const yearlySavings = monthlySavings != null ? monthlySavings * 12 : 0;
 
-  // ──────────────────────────────────────────────────────────────────────────────
-  // UI
-  // ──────────────────────────────────────────────────────────────────────────────
+  /* ------------------------------------------------------------------ */
+  /*  UI                                                                */
+  /* ------------------------------------------------------------------ */
   return (
     <div className="table" style={{ textAlign: "center" }}>
       <p>Estimated Savings:</p>
@@ -69,6 +67,11 @@ export default function Estimate() {
 
       {!loading && !error && monthlySavings != null && (
         <>
+          <p style={{ margin: "0.5rem 0", fontSize: "0.9rem" }}>
+            (calculations with&nbsp;
+            <strong>${tariffPerHour.toFixed(2)} $/kWh</strong>)
+          </p>
+
           <p style={{ fontSize: "2rem", margin: "1rem 0" }}>
             ${monthlySavings.toFixed(2)} <small>monthly</small>
           </p>
