@@ -54,7 +54,7 @@ EnergySavingCostEstimator-24 PATCH Remove the ability to estimate savings if add
 
 EnergySavingCostEstimator-25 PATCH Remove oldand unused pages (Join, Log in).
 
-## MVP-2.5 - 2025-07-13
+## MVP-2.5 - 2025-07-11
 ### Added
 
 EnergySavingCostEstimator-26 MINOR Add an ability to delete smart devices in admin panel
