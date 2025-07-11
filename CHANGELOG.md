@@ -53,3 +53,17 @@ EnergySavingCostEstimator-23 MINOR Add an ability to delete devices from the lis
 EnergySavingCostEstimator-24 PATCH Remove the ability to estimate savings if adding is pending or no devices are listed; display an error “Please, add device first!”.
 
 EnergySavingCostEstimator-25 PATCH Remove oldand unused pages (Join, Log in).
+
+## MVP-2.5 - 2025-07-13
+### Added
+
+EnergySavingCostEstimator-26 MINOR Add an ability to delete smart devices in admin panel
+
+EnergySavingCostEstimator-27 MINOR Add an ability to delete dumb devices connected to a smart device in admin panel
+
+EnergySavingCostEstimator-28 MINOR Show all the appointments made in admin panel
+
+EnergySavingCostEstimator-29 MINOR Add kwt/hour field before calculation
+
+
+
