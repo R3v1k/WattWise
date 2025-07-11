@@ -32,23 +32,6 @@ We follow the test pyramid approach:
 
 ---
 
-## 📂 Test Structure in Repository
-
-tests/
-├── unit/
-│ ├── estimator.test.js
-│ └── auth.test.java
-├── integration/
-│ ├── api/
-│ │ ├── EstimateControllerTest.java
-│ │ └── UserDeviceLinkTest.java
-├── e2e/
-│ ├── calculator-flow.cy.js
-│ └── login.cy.js
-
-
----
-
 ## 🔁 CI Integration
 
 - All tests run automatically on each pull request (`develop`, `main`)
