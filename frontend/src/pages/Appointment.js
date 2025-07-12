@@ -99,6 +99,7 @@ export default function Appointment() {
           type="tel"
           placeholder="+1 (555) 123-4567"
           required
+          lang="en"
           style={inputStyle}
           value={phone}
           onChange={e => setPhone(e.target.value)}
@@ -112,6 +113,7 @@ export default function Appointment() {
           type="email"
           placeholder="you@example.com"
           required
+          lang="en"
           style={inputStyle}
           value={email}
           onChange={e => setEmail(e.target.value)}
