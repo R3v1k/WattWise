@@ -1,28 +1,28 @@
 <a id="readme-top"></a>
 
-# 📊 Energy Cost Saving Estimator
+# 📊 WattWise
 
-[![Contributors](https://img.shields.io/github/contributors/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/graphs/contributors)
-[![Forks](https://img.shields.io/github/forks/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/network/members)
-[![Stargazers](https://img.shields.io/github/stars/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/stargazers)
-[![Issues](https://img.shields.io/github/issues/R3v1k/EnergyCostSavingEstimator.svg?style=for-the-badge)](https://github.com/R3v1k/EnergyCostSavingEstimator/issues)
-[![License](https://img.shields.io/github/license/R3v1k/EnergyCostSavingEstimator?style=for-the-badge&cacheSeconds=0)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/R3v1k/WattWise.svg?style=for-the-badge)](https://github.com/R3v1k/WattWise/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/R3v1k/WattWise.svg?style=for-the-badge)](https://github.com/R3v1k/WattWise/network/members)
+[![Stargazers](https://img.shields.io/github/stars/R3v1k/WattWise.svg?style=for-the-badge)](https://github.com/R3v1k/WattWise/stargazers)
+[![Issues](https://img.shields.io/github/issues/R3v1k/WattWise.svg?style=for-the-badge)](https://github.com/R3v1k/WattWise/issues)
+[![License](https://img.shields.io/github/license/R3v1k/WattWise?style=for-the-badge&cacheSeconds=0)](LICENSE)
 
 ---
 
 <div align="center">
-  <h3 align="center">Energy Cost Saving Estimator</h3>
+  <h3 align="center">WattWise</h3>
   <p align="center">
     A smart tool to estimate potential savings from optimizing energy usage.
     <br />
-    <a href="https://github.com/R3v1k/EnergyCostSavingEstimator"><strong>Explore the documentation »</strong></a>
+    <a href="https://github.com/R3v1k/WattWise"><strong>Explore the documentation »</strong></a>
     <br />
     <br />
     <a href="https://drive.google.com/file/d/1jFldc7cPTFhcbB_Lyyhdt7Cn5E1Y1cAM/view?usp=sharing">View Demo</a>
     ·
-    <a href="https://github.com/R3v1k/EnergyCostSavingEstimator/issues">Report Bug</a>
+    <a href="https://github.com/R3v1k/WattWise/issues">Report Bug</a>
     ·
-    <a href="https://github.com/R3v1k/EnergyCostSavingEstimator/issues">Request Feature</a>
+    <a href="https://github.com/R3v1k/WattWise/issues">Request Feature</a>
   </p>
 </div>
 
@@ -62,7 +62,7 @@
 
 ## 💡 About The Project
 
-The Energy Cost Saving Estimator helps users evaluate and plan energy-saving strategies. With real-time device management and usage simulation, it enables informed decisions for smarter consumption.
+WattWise helps users evaluate and plan energy-saving strategies. With real-time device management and usage simulation, it enables informed decisions for smarter consumption.
 
 **Key Features:**
 - Device & room configuration
@@ -106,8 +106,8 @@ The Energy Cost Saving Estimator helps users evaluate and plan energy-saving str
 ### Installation
 
 ```bash
-git clone https://github.com/R3v1k/EnergyCostSavingEstimator.git
-cd EnergyCostSavingEstimator
+git clone https://github.com/R3v1k/WattWise.git
+cd WattWise
 ```
 
 #### Backend:
@@ -364,7 +364,7 @@ Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these 
 - **Java 17** with Maven
 - Runs on Ubuntu GitHub-hosted runners
 - Tests execute under the `test` Spring profile, using H2 in-memory database to avoid dependency on local PostgreSQL
-- Security configuration is swapped in tests with a dedicated `revik.com.energycostsavingestimator.TestSecurityConfig` to permit all requests
+- Security configuration is swapped in tests with a dedicated `revik.com.wattwise.TestSecurityConfig` to permit all requests
 - Build steps:
   1. Checkout repository
   2. Set up Java and Maven caching
@@ -378,7 +378,7 @@ Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these 
 - Tests **must** pass with `application-test.properties` configured for H2.
 - The `SecurityConfig` is excluded in the `test` profile to avoid bean conflicts.
 
-> If you extend the security or data model, remember to adapt both `SecurityConfig` and `revik.com.energycostsavingestimator.TestSecurityConfig` to keep CI green.
+> If you extend the security or data model, remember to adapt both `SecurityConfig` and `revik.com.wattwise.TestSecurityConfig` to keep CI green.
 ---
 ## 🗺 Roadmap
 
@@ -388,7 +388,7 @@ Our CI pipeline is defined in `.github/workflows/full-ci.yml` and follows these 
 - [ ] Enhanced user analytics dashboard
 - [ ] Multi-language support
 
-See the [issues](https://github.com/R3v1k/EnergyCostSavingEstimator/issues) for more.
+See the [issues](https://github.com/R3v1k/WattWise/issues) for more.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -423,7 +423,7 @@ Project Maintainers:
 [Ta6leTkaa](https://github.com/Ta6leTkaa) <br>
 [Brevolg](https://github.com/Brevolg)
 
-Project Link: [https://github.com/R3v1k/EnergyCostSavingEstimator](https://github.com/R3v1k/EnergyCostSavingEstimator)
+Project Link: [https://github.com/R3v1k/WattWise](https://github.com/R3v1k/WattWise)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
