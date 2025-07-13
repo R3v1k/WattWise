@@ -276,6 +276,15 @@ gitGraph
    checkout develop
    merge main tag:"back‑merge"
 ```
+### Branch types and flow:
+
+1. **`main`** – The stable production branch. Only finished releases and hotfixes are merged here.
+2. **`develop`** – The integration branch for ongoing development. All new features and fixes are merged here before a release.
+3. **`feature/*`** – Feature branches (e.g., `feature/123-awesome`) are created from `develop` and merged back when complete.
+4. **`release/*`** – Release branches (e.g., `release/1.0.0`) prepare code for production, allowing version bumps and minor fixes before merging into both `main` and `develop`.
+5. **`hotfix/*`** – Hotfix branches (e.g., `hotfix/124-critical`) are created from `main` to address critical production issues and are merged back into both `main` and `develop`.
+
+This model ensures clear separation of concerns, allows for parallel development, and provides structured release management.
 
 #### Issue management
 
