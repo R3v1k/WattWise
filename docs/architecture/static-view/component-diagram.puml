@@ -1,16 +1,11 @@
 @startuml
-' Use rectangle style for components
+' Static component diagram for WattWise
 skinparam componentStyle rectangle
 
-component "Web UI\n(React)"        as web
-component "API Gateway\n(Node.js)" as api
-component "Estimator Service\n(Python/Flask)" as est
-component "Data Service\n(Go)"     as data
-database  "PostgreSQL"             as db
+component "Web UI\n(React.js)"          as WebUI
+component "WattWise API\n(Spring Boot)" as API
+database  "SQL Server"                  as DB
 
-web --> api : HTTPS REST
-api --> est : gRPC/JSON
-api --> data: gRPC/JSON
-est --> db : SQL/TCP
-data --> db: SQL/TCP
+WebUI --> API : HTTP REST (JSON)
+API   --> DB  : postgreSQL
 @enduml
