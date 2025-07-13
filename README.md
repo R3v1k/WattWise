@@ -151,14 +151,8 @@ Our system is organized into five loosely-coupled, highly cohesive components:
 - **Web UI** (React)  
   Renders the user interface, collects input, and displays results.
 
-- **API Gateway** (Node.js/Express)  
+- **API Gateway** (SprintBoot)  
   Handles authentication, routing, and request validation.
-
-- **Estimator Service** (Python/Flask)  
-  Contains all cost-saving calculation logic; no direct database or UI code.
-
-- **Data Service** (Go)  
-  Fetches and stores energy rates & user profiles from the database.
 
 - **PostgreSQL**  
   Persists historical rates and user data.
