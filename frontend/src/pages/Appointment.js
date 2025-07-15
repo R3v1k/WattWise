@@ -91,7 +91,7 @@ export default function Appointment() {
   };
 
   return (
-    <form className="table" style={containerStyle} onSubmit={handleSubmit}>
+    <form className="table" lang="en" style={containerStyle} onSubmit={handleSubmit}>
       {/* --- Phone --- */}
       <label style={labelStyle}>
         Phone
