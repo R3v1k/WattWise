@@ -7,6 +7,7 @@ export default function AdminPanel() {
   const [smart, setSmart] = useState([]);
   const [templates, setTemplates] = useState([]);
   const [linkSelect, setLinkSelect] = useState({});
+  const [showLinkModal, setShowLinkModal] = useState({});
   const [showForm, setShowForm] = useState(false);
   const [newName, setNewName] = useState('');
   const [error, setError] = useState('');
@@ -82,7 +83,7 @@ export default function AdminPanel() {
     background: '#444',
     padding: '1.5rem',
     borderRadius: '0.5rem',
-    minWidth: 300,
+    minWidth: 400,
     maxHeight: '80vh',
     overflowY: 'auto'
   };
@@ -114,22 +115,26 @@ export default function AdminPanel() {
   };
 
   const handleLink = async smartId => {
-    const dumbId = linkSelect[smartId];
-    if (!dumbId) return;
-
+    const dumbIds = linkSelect[smartId] || [];
+    if (dumbIds.length === 0) return;
     try {
-      const resLink = await fetch(`/api/smart-devices/${smartId}/supported/${dumbId}`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (!resLink.ok) throw new Error('Link failed');
-
-      const tpl = templates.find(t => t.id === dumbId);
-      setSmart(prev => prev.map(s => s.id === smartId ? {
-        ...s,
-        devices: [...(s.devices || []), { id: dumbId, name: tpl?.name || `#${dumbId}` }]
-      } : s));
-      setLinkSelect(prev => ({ ...prev, [smartId]: null }));
+      for (let dumbId of dumbIds) {
+        const resLink = await fetch(`/api/smart-devices/${smartId}/supported/${dumbId}`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (!resLink.ok) throw new Error('Link failed');
+      }
+      const newDevices = templates
+        .filter(t => dumbIds.includes(t.id))
+        .map(t => ({ id: t.id, name: t.name }));
+      setSmart(prev =>
+        prev.map(s =>
+          s.id === smartId ? { ...s, devices: [...(s.devices || []), ...newDevices] } : s
+        )
+      );
+      setLinkSelect(prev => ({ ...prev, [smartId]: [] }));
+      setShowLinkModal(prev => ({ ...prev, [smartId]: false }));
     } catch (e) {
       setError(e.message);
     }
@@ -245,18 +250,58 @@ export default function AdminPanel() {
               </div>
             ))}
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '0.5rem', marginTop: '1rem' }}>
-              <select
-                value={linkSelect[s.id] ?? ''}
-                onChange={e => setLinkSelect(prev => ({ ...prev, [s.id]: e.target.value ? parseInt(e.target.value, 10) : null }))}
-              >
-                <option value="" disabled>-- choose dumb device --</option>
-                {getAvailableFor(s.id).map(t => (
-                  <option key={t.id} value={String(t.id)}>{t.name}</option>
-                ))}
-              </select>
-              <button style={button} onClick={() => handleLink(s.id)} disabled={!linkSelect[s.id]}>Link</button>
-            </div>
+            <button style={button} onClick={() => setShowLinkModal(prev => ({ ...prev, [s.id]: true }))}>
+              Add dumb devices
+            </button>
+
+            {showLinkModal[s.id] && (
+              <div style={modalBackdrop} onClick={() => setShowLinkModal(prev => ({ ...prev, [s.id]: false }))}>
+                <div style={modalCard} onClick={e => e.stopPropagation()}>
+                  <h3 style={{ marginBottom: '1rem' }}>Select dumb devices</h3>
+                  {getAvailableFor(s.id).map(t => (
+                    <label
+                      key={t.id}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        gap: '0.25rem',
+                        marginBottom: '0.125rem',
+                        whiteSpace: 'nowrap',
+                        cursor: 'pointer',
+                        marginRight: '1rem'
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={(linkSelect[s.id] || []).includes(t.id)}
+                        onChange={e => {
+                          const checked = e.target.checked;
+                          setLinkSelect(prev => {
+                            const current = prev[s.id] || [];
+                            return {
+                              ...prev,
+                              [s.id]: checked
+                                ? [...current, t.id]
+                                : current.filter(id => id !== t.id)
+                            };
+                          });
+                        }}
+                      />
+                      {t.name}
+                    </label>
+                  ))}
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '1rem' }}>
+                    <button style={button} onClick={() => setShowLinkModal(prev => ({ ...prev, [s.id]: false }))}>
+                      Cancel
+                    </button>
+                    <button style={button} onClick={() => handleLink(s.id)}>
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
